@@ -364,8 +364,10 @@ section{
 
 .product .box-container{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem,1fr));
+  grid-template-columns: repeat(auto-fit, 30rem); /* Fixed size for two boxes */
   gap: 2rem;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 
 }
 
@@ -376,6 +378,8 @@ section{
   position: relative;
   overflow: hidden;
   text-align: center;
+  width: 30rem; /* Fixed width for each box */
+  margin: 5%;
 }
 
 /* .product #first

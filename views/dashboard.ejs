@@ -16,24 +16,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/home">
                         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="title">Dashboard</span>
+                        <span class="title">Home Browser</span>
                     </a>
-                </li>
+                
                 <li>
-                    <a href="#">
+                    <a href="/dashboard">
                         <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></span>
-                        <span class="title">Customers</span>
+                        <span class="title">Admin Dashboard</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                        <span class="title">Message</span>
-                    </a>
-                </li>
-                <li>
+                <li> 
                     <a href="#">
                         <span class="icon"><ion-icon name="help-outline"></ion-icon></ion-icon></span>
                         <span class="title">Help</span>
@@ -43,12 +37,6 @@
                     <a href="#">
                         <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
                         <span class="title">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                        <span class="title">Password</span>
                     </a>
                 </li>
                 <li>
@@ -83,8 +71,8 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
-                        <div class="cardName">Daily Views</div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Customers</div>
                     </div>
                     <div class="iconBx">
                         <ion-icon name="eye-outline"></ion-icon>
@@ -92,25 +80,17 @@
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers">90</div>
                         <div class="cardName">Sales</div>
                     </div>
                     <div class="iconBx">
                         <ion-icon name="cart-outline"></ion-icon>
                     </div>
                 </div>
+            
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">Comments</div>
-                    </div>
-                    <div class="iconBx">
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <div class="numbers">7,842</div>
+                        <div class="numbers">35336.50</div>
                         <div class="cardName">Earning</div>
                     </div>
                     <div class="iconBx">
@@ -123,9 +103,11 @@
             <!-- Add Charts -->
             <div class = "graphBox">
                 <div class="box">
+                    <h2>Category Statistics </h2>
                     <canvas id="myChart"></canvas>
                 </div>
                 <div class="box">
+                    <h2>Sales graph by month</h2>
                     <canvas id="earning"></canvas>
                 </div>
             </div>
@@ -135,42 +117,48 @@
                 <!-- order details list-->
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                        <h2>Best Selling Products</h2>
+                        <!-- <a href="#" class="btn">View All</a> -->
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
+                                <td>Product name</td>
+                                <td>Quantity sold</td>
+                                <td>$Amount sold</td>
+                                <td>Categories</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><spam class="status delivered">Delivered</td>
+                                <td>Durian Crepe</td>
+                                <td>550</td>
+                                <td>2200.00</td>
+                                <td><spam class="status delivered">Crepe</td>
                             </tr>
                             <tr>
-                                <td>Window Coolers</td>
-                                <td>$100</td>
-                                <td>Due</td>
-                                <td><spam class="status return">Return</td>
+                                <td>Golden cheese bread</td>
+                                <td>467</td>
+                                <td>3269.00</td>
+                                <td><spam class="status return">Bread</td>
                             </tr>
                             <tr>
-                                <td>Speaker</td>
-                                <td>$300</td>
-                                <td>Paid</td>
-                                <td><spam class="status inprogress">In Progress</td>
+                                <td>Custard Pudding</td>
+                                <td>456</td>
+                                <td>1281.00</td>
+                                <td><spam class="status inprogress">Pudding</td>
                             </tr>
                             <tr>
-                                <td>Laptop</td>
-                                <td>$2000</td>
-                                <td>Due</td>
-                                <td><spam class="status pending">Pending</td>
+                                <td>Coconut Coffee Pudding</td>
+                                <td>427</td>
+                                <td>1281.00</td>
+                                <td><spam class="status inprogress">Pudding</td>
+                            </tr>
+                            <tr>
+                                <td>Signature Box</td>
+                                <td>335</td>
+                                <td>8375.00</td>
+                                <td><spam class="status pending">Box set</td>
                             </tr>
                         </tbody>
                     </table>
@@ -179,20 +167,31 @@
                 <!-- New Customers -->
                 <div class="recentCustomers">
                     <div class="cardHeader">
-                        <h2>Recent Customers</h2>
+                        <h2>Most recent customers</h2>
                     </div>
                     <table>
                         <tr>
-                            <td width="60px"><div class="imgBx"><img src="./images/dashboard/img1.jpg"></div></td>
-                            <td><h4>David<br><span>Italy</span></h4></td>
+                            <td>
+
+                                <h4>Lucas Wilson</h4>
+                                <span>04-04-2024</span>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><h4>Avery Martinez</h4>
+                                <span>04-01-2024</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td width="60px"><div class="imgBx"><img src="./images/dashboard/img2.jpg"></div></td>
-                            <td><h4>Nirmal<br><span>France</span></h4></td>
+                            <td><h4>Harper Hernandez</h4>
+                                <span>03-24-2024</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td width="60px"><div class="imgBx"><img src="./images/dashboard/img3.jpg"></div></td>
-                            <td><h4>Diana<br><span>Malaysia</span></h4></td>
+                            <td><h4>Evelyn King</h4>
+                                <span>03-19-2024</span>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -207,7 +206,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
-    <script src="my_chart.js"></script>
+    <script src="js/my_chart.js"></script>
     <script>
         // MenuToggle
         let toggle = document.querySelector('.toggle');

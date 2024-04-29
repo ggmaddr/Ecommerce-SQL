@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname,'views'))
 app.use(express.static('public'))
 //create prefix /static ROUTE and join path 'public'
 app.use('/static', express.static(path.join(__dirname, 'public')))
+//TODO: if have time, create .env file
 const db = await mysql.createPool({
     user: "cs157a-remote",
     host: "192.168.86.28",
@@ -23,23 +24,42 @@ const db = await mysql.createPool({
     database: "ecommerce"
 })
 
-// Query to fetch data from the customers table
-const query = 'SELECT * FROM Products';
 
-// A simple SELECT query
+// Get Products
+const [products] = await db.query("SELECT * FROM Products");
+const [categories] = await db.query("SELECT * FROM Product_Categories")
 
-const [results, fields] = await db.query(query);
+// console.log(products); // results contains rows returned by server
+// // console.log(products3); // results contains rows returned by server
+// console.log(categories)
 
-console.log(results); // results contains rows returned by server
-console.log(fields); // fields contains extra meta data about results, if available
+//Database for dashboard
+
+const totalByCategory = `SELECT
+pc.product_category  AS category_name,
+p.product_category,
+SUM(oi.subtotal) AS total_amount
+FROM Order_Items oi
+JOIN products p ON oi.product_id = p.product_id
+JOIN product_categories pc ON p.product_category  = pc.category_id 
+GROUP BY p.product_category; `;
+
+export const [totalByCategoryQ] = await db.query(totalByCategory);
+
+console.log(totalByCategoryQ)
+
 
 
 app.get('/home', (req, res)=>{
     res.render('index')
 })
 
+app.get('/products', (req, res)=>{
+    res.render('products', {products, categories})
+})
+
 app.get('/dashboard', (req, res)=>{
-    res.render('dashboard')
+    res.render('dashboard', {totalByCategoryQ})
 })
 
 app.listen(3000,()=>{
