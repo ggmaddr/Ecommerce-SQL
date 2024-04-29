@@ -2,6 +2,9 @@ const ctx = document.getElementById('myChart');
 const earning = document.getElementById('earning');
 // const {totalByCategoryQ} = require("../../app")
 
+import("../../app.js").then(({ totalByCategoryQ}) => {
+  console.log(totalByCategoryQ);
+});
 new Chart(ctx, {
   type: 'doughnut',
   data: {

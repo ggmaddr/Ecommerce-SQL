@@ -16,22 +16,39 @@ app.set('views', path.join(__dirname,'views'))
 app.use(express.static('public'))
 //create prefix /static ROUTE and join path 'public'
 app.use('/static', express.static(path.join(__dirname, 'public')))
+
+console.log(location.hostname)
+import os from 'os';
+
+// Get network interfaces
+const networkInterfaces = os.networkInterfaces();
+
+// Filter for IPv4 addresses and exclude loopback and internal interfaces
+const ipv4Interfaces = Object.values(networkInterfaces)
+    .flat()
+    .filter(inter => inter.family === 'IPv4' && !inter.internal);
+
+// Print the IPv4 addresses of the interfaces
+ipv4Interfaces.forEach(interf => {
+    console.log(`Interface: ${interf.interfaceName}, IP: ${interf.address}`);
+});
 //TODO: if have time, create .env file
 const db = await mysql.createPool({
     user: "cs157a-remote",
-    host: "192.168.86.28",
+    host: "10.251.220.188",
     password:"Giangpass1",
     database: "ecommerce"
 })
+
 
 
 // Get Products
 const [products] = await db.query("SELECT * FROM Products");
 const [categories] = await db.query("SELECT * FROM Product_Categories")
 
-// console.log(products); // results contains rows returned by server
-// // console.log(products3); // results contains rows returned by server
-// console.log(categories)
+console.log(products); // results contains rows returned by server
+// console.log(products3); // results contains rows returned by server
+console.log(categories)
 
 //Database for dashboard
 
@@ -41,13 +58,15 @@ p.product_category,
 SUM(oi.subtotal) AS total_amount
 FROM Order_Items oi
 JOIN products p ON oi.product_id = p.product_id
-JOIN product_categories pc ON p.product_category  = pc.category_id 
-GROUP BY p.product_category; `;
+JOIN
+product_categories pc ON p.product_category  = pc.category_id 
+GROUP BY
+p.product_category;
+`;
 
 export const [totalByCategoryQ] = await db.query(totalByCategory);
 
 console.log(totalByCategoryQ)
-
 
 
 app.get('/home', (req, res)=>{
@@ -59,7 +78,7 @@ app.get('/products', (req, res)=>{
 })
 
 app.get('/dashboard', (req, res)=>{
-    res.render('dashboard', {totalByCategoryQ})
+    res.render('dashboard', {products})
 })
 
 app.listen(3000,()=>{
