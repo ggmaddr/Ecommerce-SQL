@@ -1,12 +1,17 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv'
-dotenv.config()
+// import path from 'path'
+// dotenv.config({ 
+//     path: path.resolve(__dirname, './.env') 
+//  })
+console.log(process.env.M_USERNAME,process.env.M_PWD,process.env.M_DB )
+
 //TODO: if have time, create .env file
 const db = await mysql.createPool({
-    user: "cs157a-remote",
-    host: "localhost",
-    password:"Giangpass1",
-    database: "ecommerce"
+    user: process.env.USERNAME,
+    host: process.env.HOST,
+    password:process.env.PWD,
+    database: process.env.DB
 })
 
 // Get Products
