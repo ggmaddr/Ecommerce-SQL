@@ -206,7 +206,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
-    <script src="js/my_chart.js"></script>
+    <script type="module" src="js/my_chart.js"></script>
     <script>
         // MenuToggle
         let toggle = document.querySelector('.toggle');
@@ -227,6 +227,9 @@
         }
         list.forEach((item) => 
         item.addEventListener('mouseover',activeLink));
+    </script>
+    <script>
+        
     </script>
 </body>
 </html>
