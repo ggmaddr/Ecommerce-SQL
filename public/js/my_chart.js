@@ -6,7 +6,7 @@ const earning = document.getElementById('earning');
 let totalByCat;
 let cats = []
 let dataCat = []
-await fetch("http://localhost:3000/data/totalByCategoryQ")
+await fetch("http://localhost:3000/data/totalByCategory")
   .then(response => response.json())
   .then(data => {
     // totalByCat = JSON.stringify(data);
@@ -14,6 +14,12 @@ await fetch("http://localhost:3000/data/totalByCategoryQ")
     dataCat = data.map(item => item.total_amount)
   });
 
+let monthlySales;
+await fetch("http://localhost:3000/data/salesByMonths")
+  .then(response => response.json())
+  .then(data => {
+    monthlySales = data.map(item => item.total_sales)
+  });
   
 console.log(cats)
 
@@ -40,7 +46,7 @@ new Chart(earning, {
     labels: ['January','February','March','April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'],
     datasets: [{
       label: 'earning',
-      data: [1200,1090,3000,5400,1220,3600,4800,4578,2556,8545,4587,9000],
+      data: monthlySales,
       borderWidth: 1
     }]
   },
@@ -48,5 +54,18 @@ new Chart(earning, {
       responsive: true,
     }
 });
-
+new Chart(progress, {
+  type: 'bar',
+  data: {
+    labels: ['January','February','March','April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'],
+    datasets: [{
+      label: 'earning',
+      data: monthlySales,
+      borderWidth: 1
+    }]
+  },
+  options: {
+      responsive: true,
+    }
+});
 
