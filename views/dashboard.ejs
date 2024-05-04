@@ -12,7 +12,7 @@
                 <li>
                     <a href="#">
                         <span class="icon"><ion-icon name="cafe-outline"></ion-icon></ion-icon></span>
-                        <span class="title">Om Nom Cáfe</span>
+                        <span class="title" style="font-size: 2rem">Om Nom Cáfe</span>
                     </a>
                 </li>
                 <li>
@@ -33,18 +33,6 @@
                         <span class="title">Help</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                        <span class="title">Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                        <span class="title">Sign out</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -54,24 +42,14 @@
                 <div class="toggle">
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
-                <!-- search -->
-                <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="menu-outline"></ion-icon>
-                    </label>
-                </div>
-                <!-- userImg -->
-                <div class="user">
-                    <img src="./images/dashboard/user.jpg">
-                </div>
+                
             </div>
 
             <!-- cards -->
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers"><%= numCustomers[0].count %></div>
                         <div class="cardName">Customers</div>
                     </div>
                     <div class="iconBx">
@@ -80,17 +58,17 @@
                 </div>
                 <div class="card">
                     <div>
-                        <div class="numbers">90</div>
-                        <div class="cardName">Sales</div>
+                        <div class="numbers"><%=quantities[0].count%> </div>
+                        <div class="cardName">Quantities Sold</div>
                     </div>
                     <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
+                        <ion-icon name="cart-outline"> </ion-icon>
                     </div>
                 </div>
             
                 <div class="card">
                     <div>
-                        <div class="numbers">35336.50</div>
+                        <div class="numbers"> $<%= earning[0].count %></div>
                         <div class="cardName">Earning</div>
                     </div>
                     <div class="iconBx">
@@ -111,25 +89,14 @@
                     <canvas id="earning"></canvas>
                 </div>
                 
-                <div class="box">
-                    <h2>Sales graph by month</h2>
-                    <canvas id="earning"></canvas>
-                </div>
             </div>
-            <div class = "graphBox">
+
+            <div style="margin: 5%;">
                 <div class="box">
-                    <h2>Category Statistics </h2>
-                    <canvas id="myChart"></canvas>
+                    <h2>Sales Progress over Months by Category </h2>
+                    <canvas id="progress"></canvas>
                 </div>
-                <div class="box">
-                    <h2>Sales graph by month</h2>
-                    <canvas id="earning"></canvas>
-                </div>
-                
-                <div class="box">
-                    <h2>Sales graph by month</h2>
-                    <canvas id="earning"></canvas>
-                </div>
+               
             </div>
             
 
@@ -151,36 +118,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for (let product of bestProd) {%>
                             <tr>
-                                <td>Durian Crepe</td>
-                                <td>550</td>
-                                <td>2200.00</td>
-                                <td><spam class="status delivered">Crepe</td>
+                                <td><%= product.name %> <%= stylingCat[product.category]  %></td>
+                                <td><%= product.quantity %> </td>
+                                <td>$<%=product.amount %></td>
+                                <td><spam class=<%=stylingCat[product.category]%>><%= product.category %> </td>
                             </tr>
-                            <tr>
-                                <td>Golden cheese bread</td>
-                                <td>467</td>
-                                <td>3269.00</td>
-                                <td><spam class="status return">Bread</td>
-                            </tr>
-                            <tr>
-                                <td>Custard Pudding</td>
-                                <td>456</td>
-                                <td>1281.00</td>
-                                <td><spam class="status inprogress">Pudding</td>
-                            </tr>
-                            <tr>
-                                <td>Coconut Coffee Pudding</td>
-                                <td>427</td>
-                                <td>1281.00</td>
-                                <td><spam class="status inprogress">Pudding</td>
-                            </tr>
-                            <tr>
-                                <td>Signature Box</td>
-                                <td>335</td>
-                                <td>8375.00</td>
-                                <td><spam class="status pending">Box set</td>
-                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -191,29 +136,14 @@
                         <h2>Most recent customers</h2>
                     </div>
                     <table>
-                        <tr>
-                            <td>
-
-                                <h4>Lucas Wilson</h4>
-                                <span>04-04-2024</span>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td><h4>Avery Martinez</h4>
-                                <span>04-01-2024</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4>Harper Hernandez</h4>
-                                <span>03-24-2024</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><h4>Evelyn King</h4>
-                                <span>03-19-2024</span>
-                            </td>
-                        </tr>
+                        <% recentCus.forEach(function(data) { %>
+                            <tr>
+                              <td>
+                                <h4><%= data.name %></h4>
+                                <span><%= data.date %></span>
+                              </td>
+                            </tr>
+                          <% }); %>
                     </table>
                 </div>
 

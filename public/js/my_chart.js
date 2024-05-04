@@ -20,8 +20,8 @@ await fetch("http://localhost:3000/data/salesByMonths")
   .then(data => {
     monthlySales = data.map(item => item.total_sales)
   });
-  
-console.log(cats)
+
+
 
 new Chart(ctx, {
   type: 'doughnut',
@@ -45,27 +45,103 @@ new Chart(earning, {
   data: {
     labels: ['January','February','March','April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'],
     datasets: [{
-      label: 'earning',
+      label: 'Sales of Month',
       data: monthlySales,
-      borderWidth: 1
+      borderWidth: 1,
+      backgroundColor:[
+        'rgba(255, 99, 132, 0.5)',
+      'rgba(255, 159, 64, 0.5)',
+      'rgba(255, 205, 86, 0.5)',
+      'rgba(75, 192, 192, 0.5)',
+      'rgba(54, 162, 235, 0.5)',
+      'rgba(153, 102, 255, 0.5)',
+      'rgba(201, 203, 207, 0.5)'
+      ]
     }]
   },
   options: {
       responsive: true,
     }
 });
-new Chart(progress, {
-  type: 'bar',
-  data: {
-    labels: ['January','February','March','April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'],
-    datasets: [{
-      label: 'earning',
-      data: monthlySales,
-      borderWidth: 1
-    }]
+// Big category sales chart
+let catSales;
+await fetch("http://localhost:3000/data/salesByCats")
+  .then(response => response.json())
+  .then(data => {
+    catSales = data
+  });
+  
+
+
+
+
+const data = {
+  labels: ['Jan','Feb','Mar','Apr', 'May','Jun', 'Jul', 'Aug', 'Sep','Oct', 'Nov', 'Dec'],
+  datasets: [{
+    label: 'Bread',
+    data: catSales.bread,
+    fill: false,
+    
+    borderColor: 'rgb(245, 40, 145)',
+    
   },
+  {
+    label: 'Pudding',
+    data: catSales.pudding,
+    fill: false,
+    borderColor: 'rgba(64, 10, 255, 1)',
+  },
+  {
+    label: 'Crepes',
+    data: catSales.crepes,
+    fill: false,
+    borderColor: 'rgba(255, 232, 10, 0.8)',
+  },
+  {
+    label: 'Box set',
+    data: catSales.boxset,
+    fill: false,
+    borderColor: '#00ab3f',
+  },
+]
+};
+const delayBetweenPoints = 300;
+
+new Chart(progress, {
+  type: 'line',
+  data: data,
   options: {
-      responsive: true,
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 0.3,
+        to: 0,
+        loop: true
+      },
+      x: {
+        type: 'number',
+        easing: 'linear',
+        duration: delayBetweenPoints,
+        from: NaN, // the point is initially skipped
+        delay(ctx) {
+          return ctx.index * delayBetweenPoints;
+        }
+      },
+    },
+    hoverRadius: 12,
+    interaction: {
+      mode: 'nearest',
+      axis: 'x'
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: 0,
+        max: 10000
+      }
     }
+  }
 });
 
+
+  
