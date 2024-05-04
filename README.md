@@ -2,7 +2,7 @@
 
 This guide will walk you through setting up a full-stack Node.js project from scratch.
 
-##[Video demo](https://www.youtube.com/watch?v=iq73DF-spX4)
+## [Video demo](https://www.youtube.com/watch?v=iq73DF-spX4)
 
 ## Prerequisites
 
