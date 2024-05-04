@@ -157,11 +157,9 @@ ORDER BY quantity DESC
 LIMIT 10;`
 
 export const [bestProd] = await db.query(bestProdQ);
-console.log(bestProd)
 const numCustomersQ=`SELECT COUNT(*) AS count FROM Customers;`
 const quantitiesQ=`SELECT SUM(quantity) AS count FROM Order_Items;`
 const earningQ=`SELECT SUM(subtotal) AS count FROM Order_Items;`
 export const [numCustomers] = await db.query(numCustomersQ);
 export const [quantities] = await db.query(quantitiesQ);
 export const [earning] = await db.query(earningQ);
-console.log(numCustomers, earning, quantities)
