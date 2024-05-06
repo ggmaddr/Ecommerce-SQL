@@ -9,7 +9,6 @@ let dataCat = []
 await fetch("http://localhost:3000/data/totalByCategory")
   .then(response => response.json())
   .then(data => {
-    // totalByCat = JSON.stringify(data);
     cats = data.map(item => item.category_name)
     dataCat = data.map(item => item.total_amount)
   });

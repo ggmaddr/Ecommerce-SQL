@@ -7,7 +7,7 @@ dotenv.config()
 //TODO: if have time, create .env file
 const db = await mysql.createPool({
     user: process.env.USERNAME,
-    host: process.env.HOST,
+    host: '10.251.220.188',
     password: process.env.PASS,
     database: process.env.DB
 })
@@ -39,61 +39,31 @@ SELECT
     o.order_id,
     o.order_date,
     SUM(oi.subtotal) AS total_sales
-FROM 
-    orders o
-JOIN 
-    order_items oi ON o.order_id = oi.order_id
-GROUP BY 
-    o.order_id, o.order_date
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY o.order_id, o.order_date
 ) AS order_totals
-GROUP BY 
-MONTH(order_date)
-ORDER BY 
-month;`
+GROUP BY MONTH(order_date) ORDER BY month;`
 
 const breadQ = `SELECT 
 SUM(oi.subtotal) AS sales
-FROM 
-order_items oi
-JOIN 
-products p ON oi.product_id = p.product_id
-JOIN 
-orders o ON oi.order_id = o.order_id
-WHERE 
-p.product_category = 1
-GROUP BY 
-MONTH(o.order_date)
-ORDER BY 
-MONTH(o.order_date);`
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+JOIN orders o ON oi.order_id = o.order_id
+WHERE p.product_category = 1 GROUP BY MONTH(o.order_date) ORDER BY MONTH(o.order_date);`
 const puddingQ = `SELECT 
 SUM(oi.subtotal) AS sales
-FROM 
-order_items oi
-JOIN 
-products p ON oi.product_id = p.product_id
-JOIN 
-orders o ON oi.order_id = o.order_id
-WHERE 
-p.product_category = 2
-GROUP BY 
-MONTH(o.order_date)
-ORDER BY 
-MONTH(o.order_date);
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+JOIN orders o ON oi.order_id = o.order_id
+WHERE p.product_category = 2
+GROUP BY MONTH(o.order_date) ORDER BY MONTH(o.order_date);
 `
-const crepesQ = `SELECT 
-SUM(oi.subtotal) AS sales
-FROM 
-order_items oi
-JOIN 
-products p ON oi.product_id = p.product_id
-JOIN 
-orders o ON oi.order_id = o.order_id
-WHERE 
-p.product_category = 3
-GROUP BY 
-MONTH(o.order_date)
-ORDER BY 
-MONTH(o.order_date);
+const crepesQ = `SELECT SUM(oi.subtotal) AS sales
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+JOIN orders o ON oi.order_id = o.order_id
+WHERE p.product_category = 3 GROUP BY MONTH(o.order_date) ORDER BY MONTH(o.order_date);
 `
 const boxsetQ = `SELECT 
 SUM(oi.subtotal) AS sales
@@ -105,10 +75,7 @@ JOIN
 orders o ON oi.order_id = o.order_id
 WHERE 
 p.product_category = 4
-GROUP BY 
-MONTH(o.order_date)
-ORDER BY 
-MONTH(o.order_date);`
+GROUP BY MONTH(o.order_date) ORDER BY MONTH(o.order_date);`
 
 
 export const [totalByCategory] = await db.query(totalByCategoryQ);
