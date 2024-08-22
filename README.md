@@ -1,6 +1,3 @@
-## Dear grader,
-My mySQL connection cannot sustained while my laptop is sleeping. Therefore, if you run the project at the same time my laptop is shut down, the mysql connection will not be made. Please email me at giang.ta@sjsu.edu, or text me at 669-400-1216 (Grady) at the time you grade our app, I'll turn on my computer for the MYSQL server to turn on with it. I'm 100% sure my fullstack code and mysql database works, but it work on my computer turning on for the mysql server to turn on. 
-Thank you so much!
 # ECommerce - Admin Dashboard Node.js MySQL project
 
 This guide will walk you through setting up a full-stack Node.js project from scratch.
